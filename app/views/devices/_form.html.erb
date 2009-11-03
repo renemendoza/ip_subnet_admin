@@ -1,0 +1,25 @@
+  <p>
+  <%= f.label :name %><br />
+  <%= f.text_field :name %>
+  </p>
+  <p>
+  <%= f.label :tax_id, "Tax Id" %><br />
+  <%= f.text_field :tax_id %>
+  </p>  
+  <p>
+  <%= f.label :email %><br />
+  <%= f.text_field :email %>
+  </p>  
+
+  <p>
+  <%= f.label :username, "Username (*)" %><br />
+  <%= f.text_field :username, :size => 16 %>
+  </p>  
+  <p>
+  <%= f.label :password %><br />
+  <%= f.password_field :password %>
+  </p>  
+  <p>
+  <%= f.label :password_confirmation %><br />
+  <%= f.password_field :password_confirmation  %>
+  </p>  
