@@ -1,0 +1,10 @@
+  <p>
+  <%= f.label :option_name %><br />
+  <%= f.text_field :option_name, :size => 12 %>
+  </p>
+  <p>
+  <%= f.label :option_value %><br />
+  <%= f.text_field :option_value, :size => 12 %>
+  </p>  
+
+  <%= f.hidden_field :network_id, :value => @network.id %>
