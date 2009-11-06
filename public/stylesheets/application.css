@@ -79,3 +79,15 @@ a {
   font-size: 12px;
   list-style: disc;
 }
+
+table#devices th td {
+  width: 150px;
+  height: 20px;
+}
+
+table#devices tr td {
+  width: 150px;
+  height: 20px;
+  text-align: center;
+  padding: 0px;
+}

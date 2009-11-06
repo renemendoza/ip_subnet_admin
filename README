@@ -1,1 +1,66 @@
-README FOR APP
+IP ADMINISTRATOR
+
+IP Administrator is an application to manage ip devices, specially IP phones on the networks that connects to. 
+
+Given a network address to which it is physically connected it will send arping requests to each ip address on that subnet unless limited by the range start and range end options
+
+ 
+REQUIREMENTS
+Arping on your system
+tested with 1.8.7 Rails 2.3x, MySQL
+Recent version of ISC DHCPd Server (if you want IP Administrator to manage your dhcpd.config)
+a passwordless sudo enabled account, 
+
+
+INSTRUCTIONS
+1) Setup your sudo config
+$sudo visudo
+#add this to the bottom of your file
+ip_admin ALL=(root) /usr/bin/arping  #or whatever your arping route is
+
+
+2) download the package to some path on your system
+
+3) define some defaults into your app_config.yml file
+
+#add this account name to your RAILS_ROOT/config/app_config.yml file
+APP_CONFIG[:pwdless_user] = ip_admin
+
+#create a directory where the system writes each subnet config file
+sudo mkdir /etc/dhcpd
+
+#give your user ownership of this dir
+sudo chown -R ip_admin /etc/dhcpd
+
+#let ip administrator know about it
+APP_CONFIG[:dhcpd_dir] = /etc/dhcpd
+
+#add this to let rails know where is your arping
+APP_CONFIG[:arping_path] = /usr/bin/arping
+
+
+#let ISC DHCPd know about the config by adding the following line to dhcpd.conf
+include "/etc/dhcpd/dhcp_subnets";
+
+
+$rake db:migrate #to setup the database
+
+app is simple enough to run using just webrick but you could use it under any other setup such as thin, mongrel, passenger
+
+$script/server 
+
+
+
+LIMITATIONS
+
+Arping will not ping itself so no mac address information is available on the host it is running
+
+
+REFERENCE
+
+Passwordless sudo
+http://polishlinux.org/first-steps/root-account/sudo-faq/
+http://ubuntu-tutorials.com/2007/03/01/allowing-limited-sudo-access-with-visudo/
+http://maestric.com/doc/unix/ubuntu_sudo_without_password
+
+

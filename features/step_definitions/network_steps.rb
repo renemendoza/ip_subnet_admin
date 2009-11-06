@@ -12,3 +12,7 @@ end
 Then /^I should see the following networks:$/ do |expected_networks_table|
   expected_networks_table.diff!(table_at('table').to_a)
 end
+
+Then /^I should have (\d+) networks$/ do |n|
+  Network.count.should == n.to_i
+end

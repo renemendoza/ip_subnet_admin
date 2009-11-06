@@ -1,8 +1,14 @@
 development:
-  domain: localhost:3000
+  pwdless_user: ip_admin
+  dhcpd_dir: /etc/dhcpd
+  arping_path: /usr/bin/arping
 
 test:
-  domain: test.host
+  pwdless_user: ip_admin
+  dhcpd_dir: /etc/dhcpd
+  arping_path: /usr/bin/arping
 
 production:
-  domain: example.com
+  pwdless_user: ip_admin
+  dhcpd_dir: /etc/dhcpd
+  arping_path: /usr/bin/arping

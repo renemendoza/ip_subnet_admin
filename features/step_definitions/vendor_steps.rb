@@ -12,3 +12,7 @@ end
 Then /^I should see the following vendors:$/ do |expected_vendors_table|
   expected_vendors_table.diff!(table_at('table').to_a)
 end
+
+Then /^I should have (\d+) vendors$/ do |v|
+  Vendor.count.should == v.to_i
+end

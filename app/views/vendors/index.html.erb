@@ -1,2 +1,17 @@
-<h1>Vendors#index</h1>
-<p>Find me in app/views/vendors/index.html.erb</p>
+<% content_for :title do %>
+ IP Administrator | Vendors
+<% end %>
+<%= flash[:notice] %>
+<h2>Vendors list</h2>
+
+<% @vendors.each do |vendor| %>
+  <p>
+  <%= link_to vendor.name, vendor_path(vendor) %> 
+  <%=h vendor.mac_address_prefix %>
+  <%= link_to 'edit', edit_vendor_path(vendor) %> 
+  </p>
+<% end %>
+<hr/>
+
+<p> <%= link_to "New Vendor", new_vendor_path %> </p>
+

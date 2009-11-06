@@ -10,6 +10,24 @@ module NavigationHelpers
     
     when /the homepage/
       '/'
+    when /the new network page/
+      new_network_path
+
+    when /the networks list page/
+      networks_path
+
+    when /the new vendor page/
+      new_vendor_path
+
+    when /the new device page/
+      new_device_path
+
+    when /the new device_management page/
+      new_device_management_path
+
+    when /the new device_management page/
+      new_device_management_path
+
     
     # Add more mappings here.
     # Here is a more fancy example:

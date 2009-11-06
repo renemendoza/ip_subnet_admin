@@ -1,2 +1,18 @@
-<h1>DhcpOptions#index</h1>
-<p>Find me in app/views/dhcp_options/index.html.erb</p>
+<% content_for :title do %>
+ IP Administrator | Networks | DHCP Options
+<% end %>
+<%= flash[:notice] %>
+<h2> <%= link_to "Network #{@network.address} ", network_path(@network) -%> </h2>
+
+<h3>Network DHCP Options list</h3>
+<% @dhcp_options.each do |dhcp_option| %>
+  <p>
+  <strong>  <%=h dhcp_option.option_name %> </strong>
+  <%=h dhcp_option.option_value %>
+  <%= link_to 'edit', edit_network_dhcp_option_path(@network, dhcp_option) %> 
+  </p>
+<% end %>
+<hr/>
+
+<p> <%= link_to "New DHCP Option", new_network_dhcp_option_path(@network) %> </p>
+

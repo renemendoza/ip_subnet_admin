@@ -1,2 +1,17 @@
-<h1>Networks#index</h1>
-<p>Find me in app/views/networks/index.html.erb</p>
+<% content_for :title do %>
+ IP Administrator | Networks
+<% end %>
+<%= flash[:notice] %>
+<h2>Networks list</h2>
+<% @networks.each do |network| %>
+  <p>
+  <%= link_to network.name, network_path(network) %> 
+  <%=h network.address %>
+  <%=h network.netmask %>
+  <%= link_to 'edit', edit_network_path(network) %> 
+  </p>
+<% end %>
+<hr/>
+
+<p> <%= link_to "New Network", new_network_path %> </p>
+

@@ -1,2 +1,13 @@
-<h1>Networks#edit</h1>
-<p>Find me in app/views/networks/edit.html.erb</p>
+<% content_for :title do %>
+ IP Administrator | Edit Network
+<% end %>
+<h2>Edit network</h2>
+
+<%= link_to "Network list", networks_path -%> </p> |
+<%= link_to "Delete network", @network, :method => :delete -%> </p>
+
+<% form_for @network do |f|%>
+  <%= f.error_messages %>
+  <%= render :partial => 'form', :locals => {:f => f } %>
+  <p class="button"> <%= f.submit "Update" %> </p>
+<% end -%>

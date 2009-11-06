@@ -3,6 +3,16 @@
   <%= f.text_field :name %>
   </p>
   <p>
-  <%= f.label :mac_address_prefix %><br />
-  <%= f.text_field :mac_address_prefix, :size => 20 %>
+  <%= f.label :address, "Network Address" %><br />
+  <%= f.text_field :address, :size => 20 %>
+  </p>  
+  <p>
+  <%= f.label :netmask, "Network Mask" %><br />
+  <%= f.text_field :netmask, :size => 20 %>
+  </p>  
+  <p>
+  <%= f.label :range_start, "Starting IP in DHCP Range" %>
+  <%= f.text_field :range_start, :size => 4 %><br />
+  <%= f.label :range_end, "Last IP in DHCP Range" %>
+  <%= f.text_field :range_start, :size => 4 %>
   </p>  

@@ -1,2 +1,41 @@
-<h1>Networks#show</h1>
-<p>Find me in app/views/networks/show.html.erb</p>
+<% content_for :title do %>
+ IP Administrator | Show Network 
+<% end %>
+<h2>Network <%= @network.address %></h2>
+
+<%= link_to "Edit network", edit_network_path(@network) -%> </p> |
+<%= link_to "Delete network", @network, :method => :delete -%> </p>
+
+
+  <p>
+  <strong>Name</strong><br />
+  <%= @network.name %>
+  </p>
+  <p>
+  <strong>Network Address</strong><br />
+  <%= @network.address %>
+  </p>  
+  <p>
+  <strong>Network Mask</strong><br />
+  <%= @network.netmask %>
+  </p>  
+
+  <h3> 
+  <%= link_to "Devices", network_devices_path(@network.id) -%> 
+  </h3>
+  <hr/>
+  <%= link_to "New Device", new_network_device_path(@network.id) -%> 
+
+  <h3> 
+  <%= link_to "DHCPd Options", network_dhcp_options_path(@network.id) -%> 
+  </h3>
+  <% @network.dhcp_options.each do |dhcp_option| %>
+    <p> 
+    <strong><%=h dhcp_option.option_name %></strong>
+    <%=h dhcp_option.option_value %>
+    <%= link_to 'edit', edit_network_dhcp_option_path(@network, dhcp_option) %>  
+    </p>
+  <% end %>
+
+  <hr/>
+  <%= link_to "New DHCP Option", new_network_dhcp_option_path(@network.id) -%> 

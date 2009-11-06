@@ -1,2 +1,13 @@
-<h1>Vendors#edit</h1>
-<p>Find me in app/views/vendors/edit.html.erb</p>
+<% content_for :title do %>
+ IP Administrator | Edit Vendor
+<% end %>
+<h2>Edit vendor</h2>
+
+<%= link_to "Vendor list", vendors_path -%> </p> |
+<%= link_to "Delete vendor", @vendor, :method => :delete -%> </p>
+
+<% form_for @vendor do |f|%>
+  <%= f.error_messages %>
+  <%= render :partial => 'form', :locals => {:f => f } %>
+  <p class="button"> <%= f.submit "Update" %> </p>
+<% end -%>

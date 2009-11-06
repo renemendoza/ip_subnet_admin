@@ -1,2 +1,56 @@
-<h1>Devices#index</h1>
-<p>Find me in app/views/devices/index.html.erb</p>
+<% content_for :title do %>
+ IP Administrator | Network | Devices
+<% end %>
+<%= flash[:notice] %>
+  <h2> <%= link_to "Network #{ @network.address}", network_path(@network) -%> </h2>
+<h3>Devices list</h3>
+<hr/>
+  <table id="devices">
+    <thead>
+      <tr>
+      <th> Name </th> 
+      <th> Host Name </th> 
+      <th> IP Address </th> 
+      <th> Mac Address </th> 
+      <th> Vendor </th> 
+      <th> &nbsp; </th> 
+    </tr>
+    </thead>
+    <tbody>
+    <% @discoverer.each do |a| %>
+      <%  @devices.each do |device| %>
+        <% if device.ip_address == a.first  %>
+
+        <!-- registered -->
+        <tr style='color: <%= Device.colors('identified') %>;' >
+          <td> <strong> <%=h device.name %> </strong> </td>
+          <td> <strong> <%=h device.host %> </strong> </td>
+          <td> <strong> <%=h device.ip_address %> </strong> </td>
+            <td> <strong> <%=h device.mac_address %> </strong> </td>
+            <td> <strong> <%=h device.vendor.name %> </strong> </td>
+          <td> <%= link_to 'edit', edit_network_device_path(@network, device) %> </td>
+        </tr>
+
+        <% break %>
+        <% end  %>
+      <% end %>
+      <!-- unregistered -->
+      
+      <tr style='color: <%= Device.colors(a.last[:vendor_name])%>;'>
+        <td>  </td>
+        <td>  </td>
+        <td> <%= a.first %> </td>
+        <td> <%= a.last[:mac] %> </td>
+        <td> <%= a.last[:vendor_name] %> </td>
+        <td> 
+        <% form_tag new_network_device_path(@network.id), :method => :get do%>
+          <%= hidden_field_tag "device[mac_address]", a.last[:mac] %>
+          <%= hidden_field_tag "device[vendor_name]", a.last[:vendor_name] %>
+          <%= hidden_field_tag "device[ip_address]",  a.first %>
+          <p class="button"><%= submit_tag 'Register Device' %></p>
+        <% end -%>
+        </td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>

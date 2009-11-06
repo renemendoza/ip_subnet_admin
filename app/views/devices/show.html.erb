@@ -1,2 +1,22 @@
-<h1>Devices#show</h1>
-<p>Find me in app/views/devices/show.html.erb</p>
+<% content_for :title do %>
+ IP Administrator | Show Device
+<% end %>
+<h2>Show device</h2>
+
+<%= link_to "Device list", network_devices_path(@network.id) -%> </p> |
+<%= link_to "Edit device", edit_network_device_path(@network, @device) -%> </p> |
+<%= link_to "Delete device", network_device_path(@network, @device), :method => :delete -%> </p>
+
+  <p>
+  <strong>Name</strong><br />
+  <%= @device.name %>
+  </p>
+  <p>
+  <strong>IP Address</strong><br />
+  <%= @device.ip_address %>
+  </p>  
+  <p>
+  <strong>Mac Address</strong><br />
+  <%= @device.mac_address %>
+  </p>  
+

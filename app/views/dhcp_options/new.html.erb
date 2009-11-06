@@ -1,2 +1,15 @@
-<h1>DhcpOptions#new</h1>
-<p>Find me in app/views/dhcp_options/new.html.erb</p>
+<% content_for :title do %>
+ IP Administrator | Networks | New DHCPd Option
+<% end %>
+<%= flash[:notice] %>
+<h2>New DHCPd Option</h2>
+
+<h3>
+<%= link_to "Network #{@network.address}", network_path(@network) -%> </p> 
+</h3>
+
+<% form_for ([@network, @dhcp_option]), :method => :post do |f|%>
+  <%= f.error_messages %>
+  <%= render :partial => 'form', :locals => {:f => f } %>
+  <p class="button"> <%= f.submit "Create" %> </p>
+<% end -%>

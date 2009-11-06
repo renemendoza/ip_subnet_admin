@@ -3,23 +3,20 @@
   <%= f.text_field :name %>
   </p>
   <p>
-  <%= f.label :tax_id, "Tax Id" %><br />
-  <%= f.text_field :tax_id %>
+  <%= f.label :host, "Host Name" %><br />
+  <%= f.text_field :host, :size => 12 %>
   </p>  
   <p>
-  <%= f.label :email %><br />
-  <%= f.text_field :email %>
+  <%= f.label :ip_address, "IP Address" %><br />
+  <%= f.text_field :ip_address, :size => 18 %>
+  </p>  
+  <p>
+  <%= f.label :mac_address, "Mac Address" %><br />
+  <%= f.text_field :mac_address, :size => 20 %>
+  </p>  
+  <p>
+  <%= f.label :vendor_id, "Vendor" %><br />
+  <%= f.select :vendor_id, @vendors.collect {|v| [v.name, v.id] } %>
   </p>  
 
-  <p>
-  <%= f.label :username, "Username (*)" %><br />
-  <%= f.text_field :username, :size => 16 %>
-  </p>  
-  <p>
-  <%= f.label :password %><br />
-  <%= f.password_field :password %>
-  </p>  
-  <p>
-  <%= f.label :password_confirmation %><br />
-  <%= f.password_field :password_confirmation  %>
-  </p>  
+  <%= f.hidden_field :network_id, :value => @network.id %>

@@ -1,2 +1,10 @@
-<h1>Vendors#new</h1>
-<p>Find me in app/views/vendors/new.html.erb</p>
+<% content_for :title do %>
+ IP Administrator | New Vendor
+<% end %>
+<h2>New vendor</h2>
+
+<% form_for @vendor do |f|%>
+  <%= f.error_messages %>
+  <%= render :partial => 'form', :locals => {:f => f } %>
+  <p class="button"> <%= f.submit "Create" %> </p>
+<% end -%>

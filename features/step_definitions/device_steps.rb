@@ -12,3 +12,8 @@ end
 Then /^I should see the following devices:$/ do |expected_devices_table|
   expected_devices_table.diff!(table_at('table').to_a)
 end
+
+Then /^I should have (\d+) devices$/ do |c|
+    Device.count.should == c.to_i
+end
+

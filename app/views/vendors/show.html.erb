@@ -1,2 +1,18 @@
-<h1>Vendors#show</h1>
-<p>Find me in app/views/vendors/show.html.erb</p>
+<% content_for :title do %>
+ IP Administrator | Show Vendor
+<% end %>
+<h2>Show vendor</h2>
+
+<%= link_to "Vendor list", vendors_path -%> </p> |
+<%= link_to "Edit vendor", edit_vendor_path(@vendor) -%> </p> |
+<%= link_to "Delete vendor", @vendor, :method => :delete -%> </p>
+
+
+  <p>
+  <strong>Name</strong><br />
+  <%= @vendor.name %>
+  </p>
+  <p>
+  <strong>Mac Address Prefix</strong><br />
+  <%= @vendor.mac_address_prefix %>
+  </p>  
