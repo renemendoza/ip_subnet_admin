@@ -6,18 +6,23 @@ class Discoverer
 
   attr_accessor :result
 
-  def initialize(addr_list, usr, arping_path)
+  def initialize(addr_list, usr, arping_path, iface, run_as_root=false)
     @addresses = addr_list
     @usr = usr
     @result = {} 
     addr_list.each {|a| @result[a] = {:mac => ""}  }
     @threads = []
+    @run_as_root = run_as_root
   end
 
   def run
     @addresses.each {|ip|
     @threads << Thread.new(ip) do |ip|
-      @result[ip][:mac] = %x[sudo -u #{usr} #{arping_path} -f -I eth0 -c 2 #{ip}].split("\n")[1][/(\w\w:){5}(\w\w)/] || "unknown"
+      if @run_as_root
+        @result[ip][:mac] = %x[ #{arping_path} -f -I #{iface} -c 2 #{ip}].split("\n")[1][/(\w\w:){5}(\w\w)/] || "unknown"
+      else
+        @result[ip][:mac] = %x[sudo -u #{usr} #{arping_path} -f -I #{iface} -c 2 #{ip}].split("\n")[1][/(\w\w:){5}(\w\w)/] || "unknown"
+      end
        
     end
     }

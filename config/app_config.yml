@@ -2,13 +2,16 @@ development:
   pwdless_user: ip_admin
   dhcpd_dir: /etc/dhcpd
   arping_path: /usr/bin/arping
+  run_as_root: false
 
 test:
   pwdless_user: ip_admin
   dhcpd_dir: /etc/dhcpd
   arping_path: /usr/bin/arping
+  run_as_root: false
 
 production:
   pwdless_user: ip_admin
   dhcpd_dir: /etc/dhcpd
   arping_path: /usr/bin/arping
+  run_as_root: false
