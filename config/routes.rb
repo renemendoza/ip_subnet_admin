@@ -1,6 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
 
-  map.root :controller => "devices"
+  map.root :controller => "networks"
 
   map.resources :networks do |network|
     network.resources :devices
