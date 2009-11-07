@@ -6,15 +6,15 @@ class Discoverer
 
   attr_accessor :result
 
-  def initialize(addr_list, usr, arping_path, iface, run_as_root=false)
+  def initialize(addr_list, usr, arping_path, iface, run_as_root)
     @addresses = addr_list
     @usr = usr
     @iface= iface
     @arping_path = arping_path
+    @run_as_root = run_as_root
     @result = {} 
     addr_list.each {|a| @result[a] = {:mac => ""}  }
     @threads = []
-    @run_as_root = run_as_root
   end
 
   def run
