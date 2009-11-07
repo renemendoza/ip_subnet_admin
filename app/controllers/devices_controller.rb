@@ -5,7 +5,7 @@ class DevicesController < ApplicationController
   def index
     @network = Network.find(params[:network_id])
     @devices  = @network.devices 
-    @discoverer = Discoverer.new(@network.address_list, APP_CONFIG[:pwdless_user], APP_CONFIG[:arping_path]).run.identify_macs(Vendor.vendors_list).result
+    @discoverer = Discoverer.new(@network.address_list, APP_CONFIG[:pwdless_user], APP_CONFIG[:arping_path], APP_CONFIG[:run_as_root]).run.identify_macs(Vendor.vendors_list).result
     #@endors = Vendor.all
 
   end
