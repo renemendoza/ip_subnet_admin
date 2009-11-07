@@ -9,6 +9,8 @@ class Discoverer
   def initialize(addr_list, usr, arping_path, iface, run_as_root=false)
     @addresses = addr_list
     @usr = usr
+    @iface= iface
+    @arping_path = arping_path
     @result = {} 
     addr_list.each {|a| @result[a] = {:mac => ""}  }
     @threads = []
@@ -19,9 +21,9 @@ class Discoverer
     @addresses.each {|ip|
     @threads << Thread.new(ip) do |ip|
       if @run_as_root
-        @result[ip][:mac] = %x[ #{arping_path} -f -I #{iface} -c 2 #{ip}].split("\n")[1][/(\w\w:){5}(\w\w)/] || "unknown"
+        @result[ip][:mac] = %x[ #{@arping_path} -f -I #{@iface} -c 2 #{ip}].split("\n")[1][/(\w\w:){5}(\w\w)/] || "unknown"
       else
-        @result[ip][:mac] = %x[sudo -u #{usr} #{arping_path} -f -I #{iface} -c 2 #{ip}].split("\n")[1][/(\w\w:){5}(\w\w)/] || "unknown"
+        @result[ip][:mac] = %x[sudo -u #{@usr} #{@arping_path} -f -I #{@iface} -c 2 #{ip}].split("\n")[1][/(\w\w:){5}(\w\w)/] || "unknown"
       end
        
     end
