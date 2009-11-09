@@ -21,7 +21,16 @@ class Discoverer
     @addresses.each {|ip|
     @threads << Thread.new(ip) do |ip|
       if @run_as_root
-        @result[ip][:mac] = %x[ #{@arping_path} -f -I #{@iface} -c 2 #{ip}].split("\n")[1][/(\w\w:){5}(\w\w)/] || "unknown"
+        var =  %x[ #{@arping_path} -f -I #{@iface} -c 2 #{ip}].split("\n")
+        if var.size < 2 
+          @result[ip][:mac] = "unknown" 
+        else
+          @result[ip][:mac] =  var[1][/(\w\w:){5}(\w\w)/] 
+        end
+        #@result[ip][:mac] = %x[ #{@arping_path} -f -I #{@iface} -c 2 #{ip}].split("\n")[1][/(\w\w:){5}(\w\w)/] || "unknown"
+        
+        #raise "#{@result[ip][:mac]}"
+       # = %x[ #{@arping_path} -f -I #{@iface} -c 2 #{ip}].split("\n")[1][/(\w\w:){5}(\w\w)/] || "unknown"
       else
         @result[ip][:mac] = %x[sudo -u #{@usr} #{@arping_path} -f -I #{@iface} -c 2 #{ip}].split("\n")[1][/(\w\w:){5}(\w\w)/] || "unknown"
       end
