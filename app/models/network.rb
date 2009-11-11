@@ -2,7 +2,7 @@ class Network < ActiveRecord::Base
   has_many :devices
   has_many :dhcp_options
 
-#  after_save { |network| network.to_dhcpd.conf }
+  after_save { |network| network.to_dhcpd_conf }
 
   def address_list
     (1..254).to_a.collect { |octet| address +  "." + octet.to_s}

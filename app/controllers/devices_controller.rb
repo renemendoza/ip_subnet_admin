@@ -5,9 +5,7 @@ class DevicesController < ApplicationController
   def index
     @network = Network.find(params[:network_id])
     @devices  = @network.devices 
-    @discoverer = Discoverer.new(@network.address_list, APP_CONFIG[:pwdless_user], APP_CONFIG[:arping_path], @network.interface, APP_CONFIG[:run_as_root]).run.identify_macs(Vendor.vendors_list).result
-    #@endors = Vendor.all
-
+    @discoverer = Discoverer.new(@network).run.identify_macs.result
   end
 
   def new
@@ -35,6 +33,8 @@ class DevicesController < ApplicationController
 
   def create
     @device = Device.new(params[:device])
+    #@network = Network.find(params[:network_id])
+    #@vendors = Vendor.all
     begin 
       @device.save!
       flash[:notice] = "New device created."

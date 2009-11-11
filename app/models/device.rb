@@ -3,7 +3,7 @@ class Device < ActiveRecord::Base
   belongs_to :vendor
   validates_presence_of :name, :ip_address, :mac_address
 
-  after_save { |device| device.network.to_dhcpd.conf }
+  after_save { |device| device.network.to_dhcpd_conf }
 
   #this is view code should go in a helper
   def self.colors(vendor_name)

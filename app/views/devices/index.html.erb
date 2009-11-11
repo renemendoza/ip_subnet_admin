@@ -18,38 +18,32 @@
     </thead>
     <tbody>
     <% @discoverer.each do |a| %>
-      <%  @devices.each do |device| %>
-        <% if device.ip_address == a.first  %>
-
-        <!-- registered -->
-        <tr style='color: <%= Device.colors('identified') %>;' >
-          <td> <strong> <%=h device.name %> </strong> </td>
-          <td> <strong> <%=h device.host %> </strong> </td>
-          <td> <strong> <%=h device.ip_address %> </strong> </td>
-            <td> <strong> <%=h device.mac_address %> </strong> </td>
-            <td> <strong> <%=h device.vendor.name %> </strong> </td>
-          <td> <%= link_to 'edit', edit_network_device_path(@network, device) %> </td>
-        </tr>
-
-        <% break %>
-        <% end  %>
-      <% end %>
-      <!-- unregistered -->
-      
       <tr style='color: <%= Device.colors(a.last[:vendor_name])%>;'>
-        <td>  </td>
-        <td>  </td>
+        <td> <strong> <%=h a.last[:name] %> </strong> </td>
+        <td> <strong> <%=h a.last[:host] %> </strong> </td>
         <td> <%= a.first %> </td>
-        <td> <%= a.last[:mac] %> </td>
-        <td> <%= a.last[:vendor_name] %> </td>
-        <td> 
-        <% form_tag new_network_device_path(@network.id), :method => :get do%>
-          <%= hidden_field_tag "device[mac_address]", a.last[:mac] %>
-          <%= hidden_field_tag "device[vendor_name]", a.last[:vendor_name] %>
-          <%= hidden_field_tag "device[ip_address]",  a.first %>
-          <p class="button"><%= submit_tag 'Register Device' %></p>
-        <% end -%>
-        </td>
+        <% device = @devices.select {|d| d.ip_address == a.first}.first %>
+        <% unless device.nil? %>
+
+        <td> <strong> <%= a.last[:mac_address] %> </strong> </td>
+        <td> <strong> <%= a.last[:vendor_name] %> </strong> </td>
+        <td> <%= link_to 'edit', edit_network_device_path(@network, device) %> </td>
+
+        <% else %>  
+
+          <td> <%= a.last[:mac_address] %> </td>
+          <td> <%= a.last[:vendor_name] %> </td>
+
+          <td> 
+          <% form_tag new_network_device_path(@network.id), :method => :get do%>
+            <%= hidden_field_tag "device[mac_address]", a.last[:mac_address] %>
+            <%= hidden_field_tag "device[vendor_name]", a.last[:vendor_name] %>
+            <%= hidden_field_tag "device[ip_address]",  a.first %>
+            <p class="button"><%= submit_tag 'Register Device' %></p>
+          <% end -%>
+          </td>
+        <% end %>  
+
       </tr>
     <% end %>
     </tbody>
