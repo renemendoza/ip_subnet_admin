@@ -21,16 +21,18 @@
       <tr style='color: <%= Device.colors(a.last[:vendor_name])%>;'>
         <td> <strong> <%=h a.last[:name] %> </strong> </td>
         <td> <strong> <%=h a.last[:host] %> </strong> </td>
-        <td> <%= a.first %> </td>
+
         <% device = @devices.select {|d| d.ip_address == a.first}.first %>
         <% unless device.nil? %>
 
+          <td> <a href="http://<%= a.first -%>"> <%= a.first -%> </a> </td>
         <td> <strong> <%= a.last[:mac_address] %> </strong> </td>
         <td> <strong> <%= a.last[:vendor_name] %> </strong> </td>
         <td> <%= link_to 'edit', edit_network_device_path(@network, device) %> </td>
 
         <% else %>  
 
+          <td> <%= a.first %> </td>
           <td> <%= a.last[:mac_address] %> </td>
           <td> <%= a.last[:vendor_name] %> </td>
 

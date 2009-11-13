@@ -40,6 +40,8 @@ APP_CONFIG[:dhcpd_dir] = /etc/dhcpd
 #add this to let rails know where is your arping
 APP_CONFIG[:arping_path] = /usr/bin/arping
 
+#depending on your configuration you might need to run rails as root if you do it then
+APP_CONFIG[:run_as_root] = true
 
 #let ISC DHCPd know about the config by adding the following line to dhcpd.conf
 include "/etc/dhcpd/dhcp_subnets";

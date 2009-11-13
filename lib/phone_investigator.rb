@@ -59,7 +59,7 @@ class PolycomInvestigator < PhoneInvestigator
 
   def start
     @page = @agent.get @url
-    @page = @agent.click(@page.links.select {|l| l.text =~/Lines/}.first)
+    @page = @agent.click(@page.links.select {|l| l.text =~/Line/}.first)
     form = @page.forms.first
     #puts @vendor
     @display_name = form['reg.1.displayName']

@@ -10,6 +10,7 @@
   <strong>  <%=h dhcp_option.option_name %> </strong>
   <%=h dhcp_option.option_value %>
   <%= link_to 'edit', edit_network_dhcp_option_path(@network, dhcp_option) %> 
+<%= link_to "delete", network_dhcp_option_path(@network, dhcp_option), :method => :delete -%> </p>
   </p>
 <% end %>
 <hr/>
