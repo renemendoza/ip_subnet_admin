@@ -1,7 +1,10 @@
 class Device < ActiveRecord::Base
   belongs_to :network
   belongs_to :vendor
-  validates_presence_of :name, :ip_address, :mac_address
+  validates_presence_of :name, :ip_address, :mac_address, :host
+  validates_uniqueness_of :host
+  validates_uniqueness_of :ip_address
+  validates_uniqueness_of :mac_address
 
 #  after_save { |device| device.network.to_dhcpd_conf }
   after_save { |device| Network.to_dhcpd_conf }
